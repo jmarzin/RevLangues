@@ -1,0 +1,164 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_alignParentTop="true"
+    android:layout_centerHorizontal="true"
+    android:divider="@drawable/divider"
+    android:focusable="false"
+    android:showDividers="middle">
+
+    <TableLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:stretchColumns="1,2"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/titre_langue"
+            android:id="@+id/t_langue"
+            android:elegantTextHeight="false"
+            android:textStyle="bold"
+            android:textSize="@dimen/abc_text_size_title_material"
+            android:paddingTop="@dimen/abc_action_bar_default_padding_material"
+            android:gravity="center_horizontal"
+            android:paddingBottom="10dp" />
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <ImageButton
+                android:layout_width="@dimen/taille_drap"
+                android:layout_height="@dimen/taille_drap"
+                android:id="@+id/im_italien"
+                android:contentDescription="@string/Italien"
+                android:src="@drawable/italien"
+                android:cropToPadding="false"
+                android:baselineAlignBottom="false"
+                android:scaleType="fitCenter"
+                android:background="#00ffffff"
+                android:clickable="true"
+                android:layout_column="1"
+                android:layout_gravity="right"
+                android:adjustViewBounds="true"
+                android:paddingRight="@dimen/demiEcartDrap"
+                android:onClick="clickDrapeauItalien"/>
+
+            <ImageButton
+                android:layout_width="@dimen/taille_drap"
+                android:layout_height="@dimen/taille_drap"
+                android:id="@+id/im_anglais"
+                android:contentDescription="@string/Anglais"
+                android:cropToPadding="false"
+                android:clickable="true"
+                android:src="@drawable/anglais"
+                android:scaleType="fitCenter"
+                android:background="#00ffffff"
+                android:layout_column="2"
+                android:adjustViewBounds="true"
+                android:layout_gravity="left"
+                android:paddingLeft="@dimen/demiEcartDrap"
+                android:onClick="clickDrapeauAnglais"/>
+        </TableRow>
+
+    </TableLayout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="@drawable/divider"
+        android:focusable="false"
+        android:showDividers="middle|end"
+        android:dividerPadding="20dp">
+
+        <Button
+            style="@android:style/Widget.DeviceDefault.Button.Borderless"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/themes"
+            android:id="@+id/b_themes"
+            android:gravity="center_vertical|left"
+            android:paddingStart="@dimen/taille_drap"
+            android:onClick="clickThemes"
+            android:textColor="#fe000000" />
+
+        <Button
+            style="@android:style/Widget.DeviceDefault.Button.Borderless"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/mots"
+            android:id="@+id/b_mots"
+            android:gravity="center_vertical|left"
+            android:paddingStart="@dimen/taille_drap"
+            android:onClick="clickMots"
+            android:textColor="#fe000000"/>
+
+        <Button
+            style="@android:style/Widget.DeviceDefault.Button.Borderless"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/verbes"
+            android:id="@+id/b_verbes"
+            android:gravity="center_vertical|left"
+            android:paddingStart="@dimen/taille_drap"
+            android:onClick="clickVerbes"
+            android:textColor="#fe000000"/>
+
+        <Button
+            style="@android:style/Widget.DeviceDefault.Button.Borderless"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/formes"
+            android:id="@+id/b_formes"
+            android:gravity="center_vertical|left"
+            android:paddingStart="@dimen/taille_drap"
+            android:onClick="clickFormes"
+            android:textColor="#fe000000"/>
+
+        <Button
+            style="@android:style/Widget.DeviceDefault.Button.Borderless"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/revision"
+            android:id="@+id/b_revision"
+            android:gravity="center_vertical|left"
+            android:paddingStart="@dimen/taille_drap"
+            android:onClick="clickRevision"
+            android:textColor="#fe000000"/>
+
+        <Button
+            style="@android:style/Widget.DeviceDefault.Button.Borderless"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/parametrage"
+            android:id="@+id/b_parametrage"
+            android:singleLine="true"
+            android:gravity="center_vertical|left"
+            android:paddingStart="@dimen/taille_drap"
+            android:onClick="clickParametrage"
+            android:textColor="#fe000000"/>
+
+        <Button
+            style="@android:style/Widget.DeviceDefault.Button.Borderless"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/quitter"
+            android:id="@+id/b_quitter"
+            android:singleLine="true"
+            android:gravity="center_vertical|left"
+            android:paddingStart="@dimen/taille_drap"
+            android:onClick="clickQuitter"
+            android:textColor="#fe000000"/>
+
+    </LinearLayout>
+
+</LinearLayout>
