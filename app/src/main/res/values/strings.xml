@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">RevLangues</string>
+    <string name="app_name">RevLang</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="themes">Thèmes</string>
@@ -23,5 +23,6 @@
     <string name="title_activity_main">RevLangues</string>
     <string name="title_activity_themes">ThemesActivity</string>
     <string name="erreurChoixLangue">Cliquez sur un drapeau pour choisir la langue.</string>
+    <string name="title_activity_service_test">ServiceTest</string>
 
 </resources>

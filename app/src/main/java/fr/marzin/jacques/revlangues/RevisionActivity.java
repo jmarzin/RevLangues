@@ -1,12 +1,16 @@
 package fr.marzin.jacques.revlangues;
 
-import android.support.v7.app.ActionBarActivity;
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.app.ActionBar;
+import android.widget.TextView;
 
 
-public class RevisionActivity extends ActionBarActivity {
+public class RevisionActivity extends Activity {
+
+    public JmSession maJmSession;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -14,6 +18,24 @@ public class RevisionActivity extends ActionBarActivity {
         setContentView(R.layout.activity_revision);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        maJmSession = new JmSession(null,getBaseContext());
+        String langue = maJmSession.getLangue();
+        if (langue.equals("Italien")) {
+            getActionBar().setIcon(R.drawable.italien);
+        } else {
+            getActionBar().setIcon(R.drawable.anglais);
+        }
+        this.setTitle("Révision");
+    }
+
+    @Override
+    protected void onPause() {
+        maJmSession.save();
+        super.onResume();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -36,4 +58,6 @@ public class RevisionActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
 }

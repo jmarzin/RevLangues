@@ -12,6 +12,7 @@ public final class ThemeContract {
     public static abstract class ThemeTable implements BaseColumns {
         public static final String TABLE_NAME = "themes";
         public static final String COLUMN_NAME_ID = "id";
+        public static final String COLUMN_NAME_NUMERO = "numero";
         public static final String COLUMN_NAME_DIST_ID = "dist_id";
         public static final String COLUMN_NAME_LANGUE_ID = "langue_id";
         public static final String COLUMN_NAME_LANGUE = "langue";

@@ -55,9 +55,11 @@ public class MainActivityDbTest
         assertEquals(1,i);
         maSession.setLangue("hébreux");
         maSession.save();
+        db.execSQL("INSERT INTO sessions (langue,derniere) VALUES (\"Italien\",1)");
         i = DatabaseUtils.queryNumEntries(db,"sessions", SessionContract.SessionTable.COLUMN_NAME_DATE_CONJ + "= \"essai\"");
         assertEquals(2,i);
         i = DatabaseUtils.queryNumEntries(db,"sessions", SessionContract.SessionTable.COLUMN_NAME_LANGUE + "= \"hébreux\"");
+        assertEquals(1,i);
     }
 
     @SmallTest

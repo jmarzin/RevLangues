@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
  */
 public class MyDbHelper extends SQLiteOpenHelper {
 
-    public static final int DATABASE_VERSION = 2;
+    public static final int DATABASE_VERSION = 5;
     public static final String DATABASE_NAME = "RevLangues.db";
     private static final String TEXT_TYPE = " TEXT";
     private static final String INTEGER_TYPE = " INTEGER";
@@ -17,6 +17,7 @@ public class MyDbHelper extends SQLiteOpenHelper {
     private static final String SQL_CREATE_THEMES =
             "CREATE TABLE " + ThemeContract.ThemeTable.TABLE_NAME + " (" +
                     ThemeContract.ThemeTable.COLUMN_NAME_ID + " INTEGER PRIMARY KEY AUTOINCREMENT" + COMMA_SEP +
+                    ThemeContract.ThemeTable.COLUMN_NAME_NUMERO + INTEGER_TYPE + COMMA_SEP +
                     ThemeContract.ThemeTable.COLUMN_NAME_LANGUE_ID + TEXT_TYPE + COMMA_SEP +
                     ThemeContract.ThemeTable.COLUMN_NAME_DIST_ID + INTEGER_TYPE + COMMA_SEP +
                     ThemeContract.ThemeTable.COLUMN_NAME_LANGUE + TEXT_TYPE + COMMA_SEP +
@@ -61,7 +62,7 @@ public class MyDbHelper extends SQLiteOpenHelper {
                     FormeContract.FormeTable.COLUMN_NAME_ID + " INTEGER PRIMARY KEY AUTOINCREMENT" + COMMA_SEP +
                     FormeContract.FormeTable.COLUMN_NAME_VERBE_ID + INTEGER_TYPE + COMMA_SEP +
                     FormeContract.FormeTable.COLUMN_NAME_DIST_ID + INTEGER_TYPE + COMMA_SEP +
-                    FormeContract.FormeTable.COLUMN_NAME_FRANCAIS + TEXT_TYPE + COMMA_SEP +
+                    FormeContract.FormeTable.COLUMN_NAME_FORME_ID + TEXT_TYPE + COMMA_SEP +
                     FormeContract.FormeTable.COLUMN_NAME_LANGUE_ID + TEXT_TYPE + COMMA_SEP +
                     FormeContract.FormeTable.COLUMN_NAME_LANGUE + TEXT_TYPE + COMMA_SEP +
                     FormeContract.FormeTable.COLUMN_NAME_PRONONCIATION + TEXT_TYPE + COMMA_SEP +
@@ -73,7 +74,7 @@ public class MyDbHelper extends SQLiteOpenHelper {
                     ThemeContract.ThemeTable.TABLE_NAME + "(" + VerbeContract.VerbeTable.COLUMN_NAME_ID + ")" +
                     " )";
     private static final String SQL_DELETE_FORMES =
-            "DROP TABLE IF EXISTS " + MotContract.MotTable.TABLE_NAME;
+            "DROP TABLE IF EXISTS " + FormeContract.FormeTable.TABLE_NAME;
 
     private static final String SQL_CREATE_SESSIONS =
             "CREATE TABLE " + SessionContract.SessionTable.TABLE_NAME + " (" +

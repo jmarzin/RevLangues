@@ -22,9 +22,12 @@ public class JmSession {
     private String date_modification_conjugaisons;
     private String date_modification_vocabulaire;
     private int[] liste_identifiants;
+    public static Boolean dejaMaj;
 
     public JmSession(String langue,Context context){
-
+        if (dejaMaj == null) {
+            dejaMaj = false;
+        }
         this.derniereSession = 1;
         this.dbManager = new MyDbHelper(context);
         this.db = this.dbManager.getWritableDatabase();
