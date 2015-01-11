@@ -150,6 +150,10 @@ public class MainActivity extends Activity {
     }
 
     public void clickQuitter(View view) {
+        if (maJmSession.getConserveStats() == 0) {
+            maJmSession.setNbQuestions(0);
+            maJmSession.setNbErreurs(0);
+        }
         this.finish();
     }
 }

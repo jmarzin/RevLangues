@@ -24,5 +24,22 @@
     <string name="title_activity_themes">ThemesActivity</string>
     <string name="erreurChoixLangue">Cliquez sur un drapeau pour choisir la langue.</string>
     <string name="title_activity_service_test">ServiceTest</string>
+    <string name="ligne1Question">Verbe ou thème</string>
+    <string name="ligne2Question">Mot ou forme</string>
+    <string name="inviteReponse">Votre réponse :</string>
+    <string name="texteReponse">Texte de la réponse</string>
+    <string name="bravoOuEchec">Bravo ou échec</string>
+    <string name="boutonVeriferAutre">Autre question</string>
+    <string name="Vocabulaire">Vocabulaire</string>
+    <string name="Conjugaisons">Conjugaisons</string>
+    <string name="invitePoidsMin">Poids minimum</string>
+    <string name="inviteAgeMin">Non révisés depuis</string>
+    <string name="inviteErrMin">Avec plus de</string>
+    <string name="jours">jours</string>
+    <string name="erreurs">erreur(s)</string>
+    <string name="conserveStats">Conserver les stats en quittant</string>
+    <string name="preparerListe">Préparer la liste</string>
+    <string name="inviteRestrictionThemes">Restreindre la liste aux thèmes sélectionnés</string>
+    <string name="inviteRestrictionVerbes">Restreindre la liste aux verbes sélectionnés</string>
 
 </resources>

@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
  */
 public class MyDbHelper extends SQLiteOpenHelper {
 
-    public static final int DATABASE_VERSION = 5;
+    public static final int DATABASE_VERSION = 6;
     public static final String DATABASE_NAME = "RevLangues.db";
     private static final String TEXT_TYPE = " TEXT";
     private static final String INTEGER_TYPE = " INTEGER";
@@ -80,10 +80,18 @@ public class MyDbHelper extends SQLiteOpenHelper {
             "CREATE TABLE " + SessionContract.SessionTable.TABLE_NAME + " (" +
                     SessionContract.SessionTable.COLUMN_NAME_LANGUE + " STRING PRIMARY KEY" + COMMA_SEP +
                     SessionContract.SessionTable.COLUMN_NAME_DERNIERE + INTEGER_TYPE + COMMA_SEP +
-                    SessionContract.SessionTable.COLUMN_NAME_DATE_CONJ + TEXT_TYPE + COMMA_SEP +
-                    SessionContract.SessionTable.COLUMN_NAME_DATE_VOCA + TEXT_TYPE + COMMA_SEP +
+                    SessionContract.SessionTable.COLUMN_NAME_MODE_REVISION + TEXT_TYPE + COMMA_SEP +
+                    SessionContract.SessionTable.COLUMN_NAME_POIDS_MIN + INTEGER_TYPE + COMMA_SEP +
+                    SessionContract.SessionTable.COLUMN_NAME_ERR_MIN + INTEGER_TYPE + COMMA_SEP +
+                    SessionContract.SessionTable.COLUMN_NAME_AGE_REV + INTEGER_TYPE + COMMA_SEP +
+                    SessionContract.SessionTable.COLUMN_NAME_CONSERVE_STATS + INTEGER_TYPE + COMMA_SEP +
+                    SessionContract.SessionTable.COLUMN_NAME_NB_QUESTIONS + INTEGER_TYPE + COMMA_SEP +
+                    SessionContract.SessionTable.COLUMN_NAME_NB_ERREURS + INTEGER_TYPE + COMMA_SEP +
+                    SessionContract.SessionTable.COLUMN_NAME_LISTE_THEMES + TEXT_TYPE + COMMA_SEP +
+                    SessionContract.SessionTable.COLUMN_NAME_LISTE_VERBES + TEXT_TYPE + COMMA_SEP +
                     SessionContract.SessionTable.COLUMN_NAME_LISTE + TEXT_TYPE +
                     " )";
+
     private static final String SQL_DELETE_SESSIONS =
             "DROP TABLE IF EXISTS " + SessionContract.SessionTable.TABLE_NAME;
 
