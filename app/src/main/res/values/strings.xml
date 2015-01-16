@@ -20,7 +20,7 @@
     <string name="title_activity_formes">Formes</string>
     <string name="title_activity_revision">Révision</string>
     <string name="title_activity_parametrage">Paramétrage</string>
-    <string name="title_activity_main">RevLangues</string>
+    <string name="title_activity_main">RevLang</string>
     <string name="title_activity_themes">ThemesActivity</string>
     <string name="erreurChoixLangue">Cliquez sur un drapeau pour choisir la langue.</string>
     <string name="title_activity_service_test">ServiceTest</string>
