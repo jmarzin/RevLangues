@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
  */
 public class MyDbHelper extends SQLiteOpenHelper {
 
-    public static final int DATABASE_VERSION = 6;
+    public static final int DATABASE_VERSION = 13;
     public static final String DATABASE_NAME = "RevLangues.db";
     private static final String TEXT_TYPE = " TEXT";
     private static final String INTEGER_TYPE = " INTEGER";
@@ -44,6 +44,7 @@ public class MyDbHelper extends SQLiteOpenHelper {
                     MotContract.MotTable.COLUMN_NAME_THEME_ID + INTEGER_TYPE + COMMA_SEP +
                     MotContract.MotTable.COLUMN_NAME_DIST_ID + INTEGER_TYPE + COMMA_SEP +
                     MotContract.MotTable.COLUMN_NAME_FRANCAIS + TEXT_TYPE + COMMA_SEP +
+                    MotContract.MotTable.COLUMN_NAME_MOT_DIRECTEUR + TEXT_TYPE + COMMA_SEP +
                     MotContract.MotTable.COLUMN_NAME_LANGUE_ID + TEXT_TYPE + COMMA_SEP +
                     MotContract.MotTable.COLUMN_NAME_LANGUE + TEXT_TYPE + COMMA_SEP +
                     MotContract.MotTable.COLUMN_NAME_PRONONCIATION + TEXT_TYPE + COMMA_SEP +
@@ -62,7 +63,7 @@ public class MyDbHelper extends SQLiteOpenHelper {
                     FormeContract.FormeTable.COLUMN_NAME_ID + " INTEGER PRIMARY KEY AUTOINCREMENT" + COMMA_SEP +
                     FormeContract.FormeTable.COLUMN_NAME_VERBE_ID + INTEGER_TYPE + COMMA_SEP +
                     FormeContract.FormeTable.COLUMN_NAME_DIST_ID + INTEGER_TYPE + COMMA_SEP +
-                    FormeContract.FormeTable.COLUMN_NAME_FORME_ID + TEXT_TYPE + COMMA_SEP +
+                    FormeContract.FormeTable.COLUMN_NAME_FORME_ID + INTEGER_TYPE + COMMA_SEP +
                     FormeContract.FormeTable.COLUMN_NAME_LANGUE_ID + TEXT_TYPE + COMMA_SEP +
                     FormeContract.FormeTable.COLUMN_NAME_LANGUE + TEXT_TYPE + COMMA_SEP +
                     FormeContract.FormeTable.COLUMN_NAME_PRONONCIATION + TEXT_TYPE + COMMA_SEP +
@@ -89,7 +90,15 @@ public class MyDbHelper extends SQLiteOpenHelper {
                     SessionContract.SessionTable.COLUMN_NAME_NB_ERREURS + INTEGER_TYPE + COMMA_SEP +
                     SessionContract.SessionTable.COLUMN_NAME_LISTE_THEMES + TEXT_TYPE + COMMA_SEP +
                     SessionContract.SessionTable.COLUMN_NAME_LISTE_VERBES + TEXT_TYPE + COMMA_SEP +
-                    SessionContract.SessionTable.COLUMN_NAME_LISTE + TEXT_TYPE +
+                    SessionContract.SessionTable.COLUMN_NAME_LISTE + TEXT_TYPE + COMMA_SEP +
+                    SessionContract.SessionTable.COLUMN_NAME_THEME_ID + INTEGER_TYPE + COMMA_SEP +
+                    SessionContract.SessionTable.COLUMN_NAME_THEME_POS + INTEGER_TYPE + COMMA_SEP +
+                    SessionContract.SessionTable.COLUMN_NAME_MOT_ID + INTEGER_TYPE + COMMA_SEP +
+                    SessionContract.SessionTable.COLUMN_NAME_MOT_POS + INTEGER_TYPE + COMMA_SEP +
+                    SessionContract.SessionTable.COLUMN_NAME_VERBE_ID + INTEGER_TYPE + COMMA_SEP +
+                    SessionContract.SessionTable.COLUMN_NAME_VERBE_POS + INTEGER_TYPE + COMMA_SEP +
+                    SessionContract.SessionTable.COLUMN_NAME_FORME_ID + INTEGER_TYPE + COMMA_SEP +
+                    SessionContract.SessionTable.COLUMN_NAME_FORME_POS + INTEGER_TYPE +
                     " )";
 
     private static final String SQL_DELETE_SESSIONS =

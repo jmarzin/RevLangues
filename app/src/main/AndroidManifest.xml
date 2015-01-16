@@ -20,14 +20,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ThemesActivity"
-            android:label="@string/title_activity_themes"
-            android:parentActivityName=".MainActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="fr.marzin.jacques.revlangues.MainActivity" />
-        </activity>
-        <activity
             android:name=".MotsActivity"
             android:label="@string/title_activity_mots"
             android:parentActivityName=".MainActivity" >
@@ -67,15 +59,42 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="fr.marzin.jacques.revlangues.MainActivity" />
         </activity>
+
         <service
             android:name=".MiseAJour"
             android:exported="false" >
         </service>
-        <receiver android:name=".RetourServiceMaj">
+
+        <receiver android:name=".RetourServiceMaj" >
             <intent-filter>
-                <action android:name = "fr.marzin.jacques.revlangues.action.MAJ"/>
+                <action android:name="fr.marzin.jacques.revlangues.action.MAJ" />
             </intent-filter>
         </receiver>
+
+        <activity
+            android:name=".ThemesActivity"
+            android:label="@string/title_activity_themes"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="fr.marzin.jacques.revlangues.MainActivity" />
+        </activity>
+        <activity
+            android:name=".MotActivity"
+            android:label="@string/title_activity_mot"
+            android:parentActivityName=".MotsActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="fr.marzin.jacques.revlangues.MotsActivity" />
+        </activity>
+        <activity
+            android:name=".FormeActivity"
+            android:label="@string/title_activity_forme"
+            android:parentActivityName=".FormesActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="fr.marzin.jacques.revlangues.FormesActivity" />
+        </activity>
     </application>
 
 </manifest>

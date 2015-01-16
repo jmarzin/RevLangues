@@ -11,7 +11,7 @@ public final class FormeContract {
 
     public static abstract class FormeTable implements BaseColumns {
         public static final String TABLE_NAME = "formes";
-        public static final String COLUMN_NAME_ID = "id";
+        public static final String COLUMN_NAME_ID = "_id";
         public static final String COLUMN_NAME_VERBE_ID = "verbe_id";
         public static final String COLUMN_NAME_FORME_ID = "forme_id";
         public static final String COLUMN_NAME_DIST_ID = "dist_id";

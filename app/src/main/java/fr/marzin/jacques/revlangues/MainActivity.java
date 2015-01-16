@@ -23,12 +23,12 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.setTitle("RevLang");
         setContentView(R.layout.activity_main);
         Context context = getApplicationContext();
         String text = getString(R.string.erreurChoixLangue);
         int duration = Toast.LENGTH_LONG;
         message = Toast.makeText(context, text, duration);
-        this.setTitle("RevLang");
     }
 
     @Override
@@ -42,7 +42,7 @@ public class MainActivity extends Activity {
     @Override
     protected void onPause() {
         maJmSession.save();
-        super.onResume();
+        super.onPause();
     }
 
     @Override
@@ -117,6 +117,7 @@ public class MainActivity extends Activity {
     public void clickMots(View view) {
         if (Oklangue()) {
             Intent intent = new Intent(this, MotsActivity.class);
+            maJmSession.setThemeId(0);
             lanceActivite(intent);
         }
     }
@@ -131,6 +132,7 @@ public class MainActivity extends Activity {
     public void clickFormes(View view) {
         if (Oklangue()) {
             Intent intent = new Intent(this, FormesActivity.class);
+            maJmSession.setVerbeId(0);
             lanceActivite(intent);
         }
     }

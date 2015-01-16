@@ -11,10 +11,11 @@ public final class MotContract {
 
     public static abstract class MotTable implements BaseColumns {
         public static final String TABLE_NAME = "mots";
-        public static final String COLUMN_NAME_ID = "id";
+        public static final String COLUMN_NAME_ID = "_id";
         public static final String COLUMN_NAME_THEME_ID = "theme_id";
         public static final String COLUMN_NAME_DIST_ID = "dist_id";
         public static final String COLUMN_NAME_FRANCAIS = "francais";
+        public static final String COLUMN_NAME_MOT_DIRECTEUR = "mot_directeur";
         public static final String COLUMN_NAME_LANGUE_ID = "langue_id";
         public static final String COLUMN_NAME_LANGUE = "langue";
         public static final String COLUMN_NAME_PRONONCIATION = "prononciation";

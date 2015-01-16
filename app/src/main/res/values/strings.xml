@@ -41,5 +41,21 @@
     <string name="preparerListe">Préparer la liste</string>
     <string name="inviteRestrictionThemes">Restreindre la liste aux thèmes sélectionnés</string>
     <string name="inviteRestrictionVerbes">Restreindre la liste aux verbes sélectionnés</string>
+    <string name="l_id">Id</string>
+    <string name="l_theme_id">Thème</string>
+    <string name="l_langue_id">Code langue</string>
+    <string name="l_francais">En français</string>
+    <string name="l_directeur">Mot directeur</string>
+    <string name="l_prononciation">Prononciation</string>
+    <string name="l_date_rev">Date de révision</string>
+    <string name="l_poids">Poids</string>
+    <string name="l_nberr">Nb erreurs</string>
+    <string name="l_dist_id">Id distant</string>
+    <string name="l_date_maj">Date mise-à-jour</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_mot">MotActivity</string>
+    <string name="title_activity_forme">FormeActivity</string>
+    <string name="l_verbe_id">Verbe</string>
+    <string name="l_forme_id">Forme</string>
 
 </resources>

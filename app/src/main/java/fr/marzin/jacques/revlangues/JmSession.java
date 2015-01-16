@@ -3,6 +3,7 @@ package fr.marzin.jacques.revlangues;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.text.TextUtils;
 
@@ -17,6 +18,7 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashSet;
 import java.util.Hashtable;
+import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
@@ -40,6 +42,14 @@ public class JmSession {
     private int conserveStats;
     private int nbQuestions;
     private int nbErreurs;
+    private int themeId;
+    private int themePos;
+    private int motId;
+    private int motPos;
+    private int verbeId;
+    private int verbePos;
+    private int formeId;
+    private int formePos;
 
     public static Boolean dejaMaj;
     public static Random aleatoire;
@@ -148,6 +158,14 @@ public class JmSession {
         for (int i = 0 ; i < listeb.length ; i++) {
             this.liste.add(listeb[i]);
         }
+        this.themeId = mCursor.getInt(mCursor.getColumnIndexOrThrow(SessionContract.SessionTable.COLUMN_NAME_THEME_ID));
+        this.themePos = mCursor.getInt(mCursor.getColumnIndexOrThrow(SessionContract.SessionTable.COLUMN_NAME_THEME_POS));
+        this.motId = mCursor.getInt(mCursor.getColumnIndexOrThrow(SessionContract.SessionTable.COLUMN_NAME_MOT_ID));
+        this.motPos = mCursor.getInt(mCursor.getColumnIndexOrThrow(SessionContract.SessionTable.COLUMN_NAME_MOT_POS));
+        this.verbeId = mCursor.getInt(mCursor.getColumnIndexOrThrow(SessionContract.SessionTable.COLUMN_NAME_VERBE_ID));
+        this.verbePos = mCursor.getInt(mCursor.getColumnIndexOrThrow(SessionContract.SessionTable.COLUMN_NAME_VERBE_POS));
+        this.formeId = mCursor.getInt(mCursor.getColumnIndexOrThrow(SessionContract.SessionTable.COLUMN_NAME_FORME_ID));
+        this.formePos = mCursor.getInt(mCursor.getColumnIndexOrThrow(SessionContract.SessionTable.COLUMN_NAME_FORME_POS));
         mCursor.close();
     }
 
@@ -196,7 +214,7 @@ public class JmSession {
         this.liste = new ArrayList<Integer>();
     }
 
-    private void creerListe() {
+    public void creerListe() {
         Timestamp date = new Timestamp(System.currentTimeMillis());
         date.setTime(date.getTime() -ageRev*24*3600000);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -251,7 +269,7 @@ public class JmSession {
                 cond4 = " AND " + FormeContract.FormeTable.COLUMN_NAME_NB_ERR + " >= " + errMin;
             }
             if (listeVerbes.length > 0) {
-                cond5 = " AND " + FormeContract.FormeTable.COLUMN_NAME_FORME_ID + " IN (";
+                cond5 = " AND " + FormeContract.FormeTable.COLUMN_NAME_VERBE_ID + " IN (";
                 for (int i=0 ; i < listeVerbes.length ; i++) {
                     if (i != 0) {cond5 += ",";}
                     cond5 += listeVerbes[i];
@@ -479,6 +497,14 @@ public class JmSession {
         values.put(SessionContract.SessionTable.COLUMN_NAME_NB_ERREURS,nbErreurs);
         values.put(SessionContract.SessionTable.COLUMN_NAME_LISTE_THEMES,serialize(listeThemes));
         values.put(SessionContract.SessionTable.COLUMN_NAME_LISTE_VERBES,serialize(listeVerbes));
+        values.put(SessionContract.SessionTable.COLUMN_NAME_THEME_ID,themeId);
+        values.put(SessionContract.SessionTable.COLUMN_NAME_THEME_POS,themePos);
+        values.put(SessionContract.SessionTable.COLUMN_NAME_MOT_ID,motId);
+        values.put(SessionContract.SessionTable.COLUMN_NAME_MOT_POS,motPos);
+        values.put(SessionContract.SessionTable.COLUMN_NAME_VERBE_ID,verbeId);
+        values.put(SessionContract.SessionTable.COLUMN_NAME_VERBE_POS,verbePos);
+        values.put(SessionContract.SessionTable.COLUMN_NAME_FORME_ID,formeId);
+        values.put(SessionContract.SessionTable.COLUMN_NAME_FORME_POS,formePos);
         int[] listeb = new int[liste.size()];
         for (int i = 0 ; i < liste.size() ; i++) {
             listeb[i] = liste.get(i);
@@ -508,9 +534,73 @@ public class JmSession {
         mCursor.close();
     }
 
-    public int[] getListeThemes() {
-        return listeThemes;
+
+    public Hashtable getListeTousThemes () {
+        int dim = (int) DatabaseUtils.queryNumEntries(db, ThemeContract.ThemeTable.TABLE_NAME);
+        Hashtable reponse = new Hashtable();
+        int[] listeId = new int[dim];
+        String[] listeNoms = new String[dim];
+        String[] projection = {
+                ThemeContract.ThemeTable.COLUMN_NAME_ID,
+                ThemeContract.ThemeTable.COLUMN_NAME_NUMERO,
+                ThemeContract.ThemeTable.COLUMN_NAME_LANGUE
+        };
+        String sortOrder =
+                ThemeContract.ThemeTable.COLUMN_NAME_NUMERO + " ASC";
+        String selection = ThemeContract.ThemeTable.COLUMN_NAME_LANGUE_ID + " = \"" + langue.substring(0,2).toLowerCase() + "\"";
+        Cursor c = db.query(
+                ThemeContract.ThemeTable.TABLE_NAME,
+                projection,
+                selection,
+                null,
+                null,
+                null,
+                sortOrder
+        );
+        for (int i = 0 ; i < c.getCount() ; i++) {
+            c.moveToNext();
+            listeId[i] = c.getInt(c.getColumnIndexOrThrow(ThemeContract.ThemeTable.COLUMN_NAME_ID));
+            listeNoms[i] = (String.format("%03d ",c.getInt(c.getColumnIndexOrThrow(ThemeContract.ThemeTable.COLUMN_NAME_NUMERO))) +
+                    c.getString(c.getColumnIndexOrThrow(ThemeContract.ThemeTable.COLUMN_NAME_LANGUE)));
+        }
+        reponse.put("ids",listeId);
+        reponse.put("noms",listeNoms);
+        return reponse;
     }
+
+    public Hashtable getListeTousVerbes () {
+        int dim = (int) DatabaseUtils.queryNumEntries(db, VerbeContract.VerbeTable.TABLE_NAME);
+        Hashtable reponse = new Hashtable();
+        int[] listeId = new int[dim];
+        String[] listeNoms = new String[dim];
+        String[] projection = {
+                VerbeContract.VerbeTable.COLUMN_NAME_ID,
+                VerbeContract.VerbeTable.COLUMN_NAME_LANGUE
+        };
+        String sortOrder =
+                VerbeContract.VerbeTable.COLUMN_NAME_LANGUE + " ASC";
+        String selection = VerbeContract.VerbeTable.COLUMN_NAME_LANGUE_ID + " = \"" + langue.substring(0,2).toLowerCase() + "\"";
+        Cursor c = db.query(
+                VerbeContract.VerbeTable.TABLE_NAME,
+                projection,
+                selection,
+                null,
+                null,
+                null,
+                sortOrder
+        );
+        for (int i = 0 ; i < c.getCount() ; i++) {
+            c.moveToNext();
+            listeId[i] = c.getInt(c.getColumnIndexOrThrow(VerbeContract.VerbeTable.COLUMN_NAME_ID));
+            listeNoms[i] = c.getString(c.getColumnIndexOrThrow(VerbeContract.VerbeTable.COLUMN_NAME_LANGUE));
+        }
+        reponse.put("ids",listeId);
+        reponse.put("noms",listeNoms);
+        return reponse;
+
+    }
+
+    public int[] getListeThemes() { return listeThemes; }
 
     public void setListeThemes(int[] listeThemes) {
         this.listeThemes = listeThemes;
@@ -594,4 +684,37 @@ public class JmSession {
     public void setNbErreurs(int nbErreurs) {
         this.nbErreurs = nbErreurs;
     }
+
+    public void setThemeId(int row) {this.themeId = row; }
+
+    public int getThemeId() { return themeId; }
+
+    public void setThemePos(int pos) {this.themePos = pos; }
+
+    public int getThemePos() { return themePos; }
+
+    public void setMotId(int row) {this.motId = row;}
+
+    public int getMotId() { return motId; }
+
+    public void setMotPos(int pos) {this.motPos = pos;}
+
+    public int getMotPos() { return motPos; }
+
+    public void setVerbeId(int row) {this.verbeId = row;}
+
+    public int getVerbeId() { return verbeId; }
+
+    public void setVerbePos(int pos) {this.verbePos = pos; }
+
+    public int getVerbePos() { return verbePos; }
+
+    public void setFormeId(int row) {this.formeId = row;}
+
+    public int getFormeId() { return formeId; }
+
+    public void setFormePos(int pos) {this.formePos = pos; }
+
+    public int getFormePos() { return formePos; }
+
 }

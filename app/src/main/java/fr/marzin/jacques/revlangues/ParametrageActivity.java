@@ -13,6 +13,9 @@ import android.widget.RadioGroup;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
+import java.util.Hashtable;
 import java.util.Random;
 
 
@@ -29,6 +32,8 @@ public class ParametrageActivity extends Activity {
     private LinearLayout mLayoutVerbes;
     private ListView lThemes;
     private ListView lVerbes;
+    private int[] tableauIdThemes;
+    private int[] tableauIdVerbes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,20 +74,34 @@ public class ParametrageActivity extends Activity {
             mRadioConjugaisons.setChecked(true);
         }
         onChangeChoix(mRadioVocabulaire);
-
-        String[] tableauThemes = new String[] {"Thème 1","Thème 2","Thème 3"};
-        String[] tableauVerbes = new String[] {"Verbe 1","Verbe 2","Verbe 3","Verbe 4"};
+        Hashtable hThemes = maJmSession.getListeTousThemes();
+        Hashtable hVerbes = maJmSession.getListeTousVerbes();
+        String[] tableauThemes = (String[]) hThemes.get("noms");
+        tableauIdThemes = (int[]) hThemes.get("ids");
+        String[] tableauVerbes = (String[]) hVerbes.get("noms");
+        tableauIdVerbes = (int[]) hVerbes.get("ids");
         lThemes = (ListView) findViewById(R.id.l_themes);
         lVerbes = (ListView) findViewById(R.id.l_verbes);
         ArrayAdapter<String> themesAdapter =
-                new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, tableauThemes);
+                new ArrayAdapter<String>(this, R.layout.choix_multiple, tableauThemes);
         ArrayAdapter<String> verbesAdapter =
-                new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, tableauVerbes);
+                new ArrayAdapter<String>(this, R.layout.choix_multiple, tableauVerbes);
         lThemes.setAdapter(themesAdapter);
-        lThemes.setItemChecked(0, true);
-        lThemes.setItemChecked(2,true);
+        int[] tableauIdThemesSel = maJmSession.getListeThemes();
+        Arrays.sort(tableauIdThemesSel);
+        for (int i = 0 ; i < tableauIdThemes.length ; i++) {
+            if (Arrays.binarySearch(tableauIdThemesSel,tableauIdThemes[i]) >= 0) {
+                lThemes.setItemChecked(i , true);
+            }
+        }
         lVerbes.setAdapter(verbesAdapter);
-        lVerbes.setItemChecked(1,true);
+        int[] tableauIdVerbesSel = maJmSession.getListeVerbes();
+        Arrays.sort(tableauIdVerbesSel);
+        for (int i = 0 ; i < tableauIdVerbes.length ; i++) {
+            if (Arrays.binarySearch(tableauIdVerbesSel,tableauIdVerbes[i]) >= 0) {
+                lVerbes.setItemChecked(i , true);
+            }
+        }
     }
 
     @Override
@@ -131,6 +150,39 @@ public class ParametrageActivity extends Activity {
     }
 
     public void onPrepareListe(View view) {
-
+        maJmSession.setPoidsMin(Integer.parseInt(mt_poidsMin.getText().toString()));
+        maJmSession.setAgeRev(Integer.parseInt(mt_ageMin.getText().toString()));
+        maJmSession.setErrMin(Integer.parseInt(mt_errMin.getText().toString()));
+        if (mt_conserveStats.isChecked()) {
+            maJmSession.setConserveStats(1);
+        } else {
+            maJmSession.setConserveStats(0);
+        }
+        if (mRadioVocabulaire.isChecked()) {
+            maJmSession.setModeRevision("Vocabulaire");
+        } else {
+            maJmSession.setModeRevision("Conjugaisons");
+        }
+        int[] tableauIdThemesChecked = new int[lThemes.getCheckedItemCount()];
+        int j = 0;
+        for (int i = 0; i < lThemes.getCount(); i++) {
+            if (lThemes.isItemChecked(i)) {
+                tableauIdThemesChecked[j]= tableauIdThemes[i];
+                j++;
+            }
+        }
+        maJmSession.setListeThemes(tableauIdThemesChecked);
+        int[] tableauIdVerbesChecked = new int[lVerbes.getCheckedItemCount()];
+        j = 0;
+        for (int i = 0 ; i < lVerbes.getCount() ; i++) {
+            if (lVerbes.isItemChecked(i)) {
+                tableauIdVerbesChecked[j] = tableauIdVerbes[i];
+                j++;
+            }
+        }
+        maJmSession.setListeVerbes(tableauIdVerbesChecked);
+        maJmSession.creerListe();
+        String sousTitre = "Liste de " + maJmSession.getNbTermesListe() + "terme(s) (" + maJmSession.getTailleListe() + ")";
+        getActionBar().setSubtitle(sousTitre);
     }
 }

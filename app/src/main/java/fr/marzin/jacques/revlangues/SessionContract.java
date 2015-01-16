@@ -23,6 +23,14 @@ public final class SessionContract {
         public static final String COLUMN_NAME_LISTE_THEMES = "listeThemes";
         public static final String COLUMN_NAME_LISTE_VERBES = "listeVerbes";
         public static final String COLUMN_NAME_LISTE = "listeObjets";
+        public static final String COLUMN_NAME_THEME_ID = "themeId";
+        public static final String COLUMN_NAME_THEME_POS = "themePos";
+        public static final String COLUMN_NAME_MOT_ID = "motId";
+        public static final String COLUMN_NAME_MOT_POS = "motPos";
+        public static final String COLUMN_NAME_VERBE_ID = "verbeId";
+        public static final String COLUMN_NAME_VERBE_POS = "verbePos";
+        public static final String COLUMN_NAME_FORME_ID = "formeID";
+        public static final String COLUMN_NAME_FORME_POS = "formePos";
 
     }
 }

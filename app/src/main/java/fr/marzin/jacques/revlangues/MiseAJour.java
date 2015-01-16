@@ -83,11 +83,6 @@ public class MiseAJour extends IntentService {
         }
     }
 
-    /**
-     * Handle action Maj in the provided background thread with the provided
-     * parameters.
-     */
-
     private void envoiMessage (String message) {
         Intent callevent = new Intent(ACTION_RETOUR_MAJ);
         callevent.setAction(ACTION_MAJ);
@@ -246,6 +241,7 @@ public class MiseAJour extends IntentService {
             values.put(MotContract.MotTable.COLUMN_NAME_THEME_ID, theme_id);
             values.put(MotContract.MotTable.COLUMN_NAME_DIST_ID, mot.getInt(0));
             values.put(MotContract.MotTable.COLUMN_NAME_FRANCAIS, mot.getString(2));
+            values.put(MotContract.MotTable.COLUMN_NAME_MOT_DIRECTEUR, mot.getString(3));
             values.put(MotContract.MotTable.COLUMN_NAME_LANGUE_ID, langue.substring(0,2));
             values.put(MotContract.MotTable.COLUMN_NAME_LANGUE, mot.getString(4));
             if (mot.length() == 6) {
@@ -265,12 +261,14 @@ public class MiseAJour extends IntentService {
         } else {
             int id = mCursor.getInt(mCursor.getColumnIndexOrThrow(MotContract.MotTable.COLUMN_NAME_ID));
             String francais  = mCursor.getString(mCursor.getColumnIndexOrThrow(MotContract.MotTable.COLUMN_NAME_FRANCAIS));
+            String mot_directeur = mCursor.getString(mCursor.getColumnIndexOrThrow(MotContract.MotTable.COLUMN_NAME_MOT_DIRECTEUR));
             String en_langue = mCursor.getString(mCursor.getColumnIndexOrThrow(MotContract.MotTable.COLUMN_NAME_LANGUE));
             String prononciation = mCursor.getString(mCursor.getColumnIndexOrThrow(MotContract.MotTable.COLUMN_NAME_PRONONCIATION));
             ContentValues values = new ContentValues();
-            if (francais != mot.getString(2) || en_langue != mot.getString(4)) {
+            if (francais != mot.getString(2) || mot_directeur != mot.getString(3) || en_langue != mot.getString(4)) {
                 nombreMaj += 1;
                 values.put(MotContract.MotTable.COLUMN_NAME_FRANCAIS, mot.getString(2));
+                values.put(MotContract.MotTable.COLUMN_NAME_MOT_DIRECTEUR, mot.getString(3));
                 values.put(MotContract.MotTable.COLUMN_NAME_LANGUE, mot.getString(4));
             } else if (mot.length() == 6) {
                 values.put(MotContract.MotTable.COLUMN_NAME_PRONONCIATION, "");
